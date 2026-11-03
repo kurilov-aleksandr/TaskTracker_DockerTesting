@@ -49,6 +49,15 @@ def test_list_tasks_page_displays_tasks(client):
     assert b"Cover the task tracker flow" in response.data
 
 
+def test_create_task_form_prevents_duplicate_submissions(client):
+    response = client.get("/tasks")
+
+    assert response.status_code == 200
+    assert b"data-prevent-duplicate-submit" in response.data
+    assert b"data-submitting-label=\"Adding...\"" in response.data
+    assert b"/static/js/prevent_duplicate_submit.js" in response.data
+
+
 def test_create_task_adds_task_and_redirects(client):
     response = client.post(
         "/tasks",

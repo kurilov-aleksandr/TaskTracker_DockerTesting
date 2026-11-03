@@ -40,6 +40,7 @@ matters.{% endblock %} {% block content %}
       method="POST"
       action="{{ url_for('routes.create_task') }}"
       class="task-form"
+      data-prevent-duplicate-submit
     >
       <div class="field">
         <label for="title">Task title</label>
@@ -62,8 +63,18 @@ matters.{% endblock %} {% block content %}
         ></textarea>
       </div>
 
-      <button type="submit" class="primary-btn">Add task</button>
+      <button
+        type="submit"
+        class="primary-btn"
+        data-submitting-label="Adding..."
+      >
+        Add task
+      </button>
     </form>
   </aside>
 </main>
+<script
+  src="{{ url_for('static', filename='js/prevent_duplicate_submit.js') }}"
+  defer
+></script>
 {% endblock %}
