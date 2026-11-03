@@ -1,0 +1,41 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Packaging/build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+.Python
+pip-wheel-metadata/
+
+# Testing and coverage
+.pytest_cache/
+.mypy_cache/
+.pyre/
+.coverage
+.coverage.*
+htmlcov/
+
+# Local database files
+*.db
+instance/*.db
+instance/*.sqlite3
+
+# IDE/editor settings
+.vscode/
+.idea/
+.DS_Store
+
+# Flask instance folder (if used for local secrets)
+instance/

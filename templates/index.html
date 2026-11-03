@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Task Tracker{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="panel page-header">
+        <h1>{% block page_title %}Task Tracker{% endblock %}</h1>
+        <p>
+          {% block page_subtitle %}Keep track of what needs to get done.{%
+          endblock %}
+        </p>
+      </header>
+
+      {% block content %}
+      <main class="panel add-task-panel">
+        <h2 class="section-title">Welcome</h2>
+        <p class="task-description">
+          Use the task dashboard to add, review, and complete your work.
+        </p>
+        <form action="{{ url_for('routes.list_tasks') }}">
+          <button type="submit" class="primary-btn">Open tasks</button>
+        </form>
+      </main>
+      {% endblock %}
+    </div>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+{% extends "index.html" %} {% block title %}Tasks | Task Tracker{% endblock %}
+{% block page_subtitle %}Stay organized and keep momentum on the work that
+matters.{% endblock %} {% block content %}
+<main class="content-grid">
+  <section class="panel task-panel">
+    <h2 class="section-title">Your tasks</h2>
+    <ul class="task-list">
+      {% for task in tasks %}
+      <li class="task-item">
+        <div class="task-main">
+          <div class="task-title-row">
+            <h3 class="task-title">{{ task.title }}</h3>
+            {% if task.completed %}
+            <span class="badge done">Done</span>
+            {% else %}
+            <span class="badge pending">Pending</span>
+            {% endif %}
+          </div>
+          <p class="task-description">{{ task.description }}</p>
+        </div>
+
+        {% if not task.completed %}
+        <div class="task-actions">
+          <form
+            method="POST"
+            action="{{ url_for('routes.mark_task_as_done', task_id=task.id) }}"
+          >
+            <button type="submit" class="primary-btn">Mark as done</button>
+          </form>
+        </div>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <aside class="panel add-task-panel">
+    <h2 class="section-title">Add a new task</h2>
+    <form
+      method="POST"
+      action="{{ url_for('routes.create_task') }}"
+      class="task-form"
+    >
+      <div class="field">
+        <label for="title">Task title</label>
+        <input
+          id="title"
+          type="text"
+          name="title"
+          placeholder="Task title"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          name="description"
+          placeholder="Write a short description..."
+          required
+        ></textarea>
+      </div>
+
+      <button type="submit" class="primary-btn">Add task</button>
+    </form>
+  </aside>
+</main>
+{% endblock %}
