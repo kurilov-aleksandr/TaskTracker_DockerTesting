@@ -1,0 +1,17 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - task_data:/app/instance
+    restart: unless-stopped
+
+  test:
+    build: .
+    command: ["pytest", "-q"]
+    profiles:
+      - test
+
+volumes:
+  task_data:
