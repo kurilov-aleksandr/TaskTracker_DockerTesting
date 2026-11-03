@@ -32,7 +32,7 @@ def create_task():
 
 @routes.route('/tasks/<int:task_id>/done', methods=['POST'])
 def mark_task_as_done(task_id):
-    task = Task.query.get(task_id)
+    task = db.session.get(Task, task_id)
     if task:
         task.completed = True
         db.session.commit()
